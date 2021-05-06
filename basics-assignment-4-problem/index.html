@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Styling</h1>
+    </header>
+    <section id="assignment">
+      <!-- 1) Fetch the user input and use it as a CSS class -->
+      <!-- The entered class should be added to the below paragraph -->
+      <input type="text" v-model="inputClass" />
+      <p v-bind:class="inputClass">
+        Style me! 1
+      </p>
+
+      <input type="text" v-model="inputClass" />
+      <p v-bind:class="{ user1 : inputClass === 'user1', user2 : inputClass === 'user2' }">
+        Style me! 2
+      </p>
+
+      <input type="text" v-on:keyup="checkUserType" v-on:keyup.enter="init" />
+      <!-- (available classes: "user1", "user2") -->
+      <p v-bind:class="getUserType">
+        Style me! 3
+      </p>
+
+      <p v-bind:class="paraClasses">
+        Style me! 4
+      </p>
+
+      
+      <!-- 2) Use the "visible" and "hidden" classes to show/ hide the above paragraph -->
+      <button v-on:click="tglBtn">Toggle Paragraph</button>
+      <!-- Clicking the button should toggle between the two options -->
+
+      <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
+      <input type="text" v-model="inputBackgroundColor" />
+      <p v-bind:class="paraClasses">Style me inline! paraClasses</p>
+      <p v-bind:class="toggleParagraph">Style me inline! toggleParagraph</p>
+      <p v-bind:style="{ backgroundColor : inputBackgroundColor }">Style me inline! backgroundColor</p>
+    </section>
+  </body>
+</html>

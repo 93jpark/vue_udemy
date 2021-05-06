@@ -21,8 +21,13 @@
       <button v-on:click="add(10)">Add 10</button>
       <button v-on:click="reduce(5)">Subtract 5</button>
       <p>Result: {{ counter }}</p>
-      <input type="text" v-on:input="setName($event, 'Schwarzmüller')">
+      <!--<input type="text" v-bind:value="name" v-on:input="setName($event, 'Schwarzmüller')">-->
+      <input type="text" v-model="name"> <!-- two-way binding:: v-bind:value + v-on -->
+      <input type="text" v-model="lastName">
+      <button v-on:click="resetInput">Rest Input</button>
       <p>Your Name: {{ name }}</p>
+      <p>Your Name: {{ fullname }}</p> <!-- call computed properties without parenthesis -->
+      <p>Your Name: {{ outputFullname() }}</p>
     </section>
   </body>
 </html>
