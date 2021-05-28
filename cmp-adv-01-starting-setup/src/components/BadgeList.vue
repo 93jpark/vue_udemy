@@ -1,10 +1,7 @@
 <template>
-  <base-card>
-      <template v-slot:header>
-        <h2>Available Badges</h2>
-      </template>
-
-      <template v-slot:default>
+  <section>
+    <base-card>
+      <template #default>
         <ul>
           <li>
             <base-badge type="admin" caption="ADMIN"></base-badge>
@@ -14,14 +11,9 @@
           </li>
         </ul>
       </template>
-  </base-card>
+    </base-card>
+  </section>
 </template>
-
-
-<script>
-
-</script>
-
 
 <style scoped>
 section h2 {
