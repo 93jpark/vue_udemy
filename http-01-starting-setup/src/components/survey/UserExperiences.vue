@@ -3,9 +3,14 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button>Load Submitted Experiences</base-button>
+        <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if="isLoading">Loading...</p>
+      <p v-else-if="!isLoading && error">
+        {{ error }}
+      </p>
+      <p v-else-if="!isLoading && (!results || results.length === 0)">No stored experiences found. Start adding some survey results first.</p>
+      <ul v-else-if="!isLoading && results && results.length > 0">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -21,9 +26,50 @@
 import SurveyResult from './SurveyResult.vue';
 
 export default {
-  props: ['results'],
   components: {
     SurveyResult,
+  },
+  data() {
+    return {
+      results: [],
+      isLoading: false,
+      error: null
+    };
+  },
+  methods: {
+    loadExperiences() {
+      this.isLoading = true;
+      this.error = null;
+      // fetch has default as method GET
+      //fetch('https://vue-http-demo-4a29a-default-rtdb.firebaseio.com/').then(response => {
+      fetch('https://vue-http-demo-4a29a-default-rtdb.firebaseio.com/surveys.json').then(response => {
+          if(response.ok) {
+            return response.json(); // parse data if it exists in JSON format
+          }
+        }
+      ).then(data => { // this then() will be executed when getting data is done.
+        this.isLoading = false;
+        const results = [];
+        for(const id in data) {
+          results.push(
+            { 
+              id: id, 
+              name: data[id].name, 
+              rating: data[id].rating 
+            }
+          );
+        }
+        this.results = results;
+      })
+      .catch((error) => { // error handling when browser-side error occurred
+        console.log(error)
+        this.isLoading = false;
+        this.error = 'Failed to fetch data - please try again later.';
+      }); 
+    }
+  },
+  mounted() {
+    this.loadExperiences();
   },
 };
 </script>
