@@ -9,11 +9,12 @@
 export default {
     methods: {
         addOne() {
-            this.$store.commit('increment');
+            //this.$store.commit('increment');
+            this.$store.dispatch('increment');
         },
         addNum() {
-            this.$store.commit('increase', {
-                    type: number,
+            this.$store.commit({
+                    type: 'increase',
                     value: 10
                 }  
             );
