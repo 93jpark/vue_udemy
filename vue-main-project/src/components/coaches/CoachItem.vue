@@ -22,10 +22,10 @@ export default {
             return this.firstName + ' ' + this.lastName;
         },
         coachContactLink() {
-            return this.$route.path + '/coaches/' + this.id + '/contact' // /coaches/c1/contact
+            return this.$route.path + '/' + this.id + '/contact' // /coaches/c1/contact
         },
         coachDetailsLink() {
-            return this.$route.path + '/coaches' + this.id; // /coaches/c1
+            return this.$route.path + '/' + this.id; // /coaches/c1
         }
     }
 }
