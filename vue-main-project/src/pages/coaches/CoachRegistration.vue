@@ -16,7 +16,9 @@ export default {
     methods: {
         saveData(data) {
             this.$store.dispatch('coaches/registerCoach', data);
-            this.$router.replace('/coaches');
+            // this makes browser move on coaches. but, it allows to go back to register form
+            //this.$router.push('/coaches');  
+            this.$router.replace('/coaches'); // this not allow go back to form, but same function with above one.
         }
     }
 }
